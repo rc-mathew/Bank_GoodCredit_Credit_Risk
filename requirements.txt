@@ -4,3 +4,5 @@ scikit-learn
 xgboost
 joblib
 matplotlib
+fastapi
+uvicorn
