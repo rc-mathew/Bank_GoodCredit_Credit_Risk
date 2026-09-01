@@ -12,6 +12,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OrdinalEncoder, StandardScaler
+from src.models.evaluate import run_evaluation
 
 from xgboost import XGBClassifier
 
@@ -245,3 +246,63 @@ def save_model(
     )
 
     return model_path
+def main() -> None:
+    """Run the production model-training and evaluation workflow."""
+
+    feature_path = (
+        PROJECT_ROOT
+        / "data"
+        / "processed"
+        / "customer_feature_matrix.csv"
+    )
+
+    if not feature_path.exists():
+        raise FileNotFoundError(
+            f"Feature matrix not found: {feature_path}"
+        )
+
+    print("Loading customer feature matrix...")
+
+    feature_matrix = pd.read_csv(
+        feature_path,
+        low_memory=False,
+    )
+
+    print(
+        f"Feature matrix shape: {feature_matrix.shape}"
+    )
+
+    print("Training XGBoost model...")
+
+    (
+        model_pipeline,
+        X_train,
+        X_test,
+        y_train,
+        y_test,
+    ) = train_model(feature_matrix)
+
+    print("\nEvaluating model...")
+
+    evaluation_results = run_evaluation(
+        model_pipeline,
+        X_test,
+        y_test,
+    )
+
+    print("\nEvaluation complete.")
+    print("Metrics:")
+    print(evaluation_results)
+
+    model_path = save_model(
+        model_pipeline
+    )
+
+    print("\nTraining completed successfully.")
+    print(f"Training rows: {len(X_train):,}")
+    print(f"Test rows: {len(X_test):,}")
+    print(f"Model saved to: {model_path}")
+
+
+if __name__ == "__main__":
+    main()

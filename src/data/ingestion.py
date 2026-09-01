@@ -11,7 +11,7 @@ RAW_DATA_DIR = PROJECT_ROOT / "data" / "raw"
 
 DEMOGRAPHICS_FILE = "Cust_Demographics_FULL.csv"
 ACCOUNT_FILE = "Cust_Account_Full.csv"
-ENQUIRY_FILE = "Cust_Enquiry_full(1).csv"
+ENQUIRY_FILE = "Cust_Enquiry_full.csv"
 
 
 def load_csv(file_path: Path) -> pd.DataFrame:

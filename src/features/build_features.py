@@ -124,3 +124,65 @@ def feature_matrix_summary(
         )
 
     return summary
+from pathlib import Path
+
+from src.data.ingestion import load_raw_data
+from src.data.validation import validate_all
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
+FEATURE_MATRIX_FILE = PROCESSED_DIR / "customer_feature_matrix.csv"
+
+
+def main() -> None:
+    """Run the complete feature-building workflow."""
+
+    print("Loading raw datasets...")
+
+    demographics, accounts, enquiries = load_raw_data()
+
+    print("Validating source datasets...")
+
+    validation_summary = validate_all(
+        demographics,
+        accounts,
+        enquiries,
+    )
+
+    print("Validation summary:")
+    print(validation_summary)
+
+    print("Building customer-level feature matrix...")
+
+    feature_matrix = build_feature_matrix(
+        demographics,
+        accounts,
+        enquiries,
+    )
+
+    summary = feature_matrix_summary(
+        feature_matrix
+    )
+
+    print("Feature matrix summary:")
+    print(summary)
+
+    PROCESSED_DIR.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    feature_matrix.to_csv(
+        FEATURE_MATRIX_FILE,
+        index=False,
+    )
+
+    print(
+        f"Feature matrix saved to: "
+        f"{FEATURE_MATRIX_FILE}"
+    )
+
+
+if __name__ == "__main__":
+    main()
