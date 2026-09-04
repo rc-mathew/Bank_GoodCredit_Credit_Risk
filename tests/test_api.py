@@ -1,19 +1,59 @@
 """API tests for the Bank GoodCredit credit-risk service."""
 
-import pandas as pd
+import numpy as np
+import pytest
 from fastapi.testclient import TestClient
 
-from src.api.main import app
+import src.api.main as api_main
 
 
-client = TestClient(app)
+class DummyModel:
+    """Small deterministic model used only for API tests."""
+
+    def predict_proba(self, features):
+        """Return a fixed valid probability distribution."""
+
+        rows = len(features)
+
+        return np.tile(
+            np.array([[0.60, 0.40]]),
+            (rows, 1),
+        )
 
 
-def test_health_endpoint():
+@pytest.fixture
+def test_client(monkeypatch, tmp_path):
+    """Create an API client without requiring production artifacts."""
+
+    fake_model_path = tmp_path / "credit_risk_model.joblib"
+    fake_model_path.touch()
+
+    monkeypatch.setattr(
+        api_main,
+        "MODEL_PATH",
+        fake_model_path,
+    )
+
+    monkeypatch.setattr(
+        api_main,
+        "load_model",
+        lambda: DummyModel(),
+    )
+
+    monkeypatch.setattr(
+        api_main,
+        "prepare_prediction_features",
+        lambda model, customer: customer,
+    )
+
+    with TestClient(api_main.app) as client:
+        yield client
+
+
+def test_health_endpoint(test_client):
     """Health endpoint should return HTTP 200."""
 
-    with TestClient(app) as test_client:
-        response = test_client.get("/health")
+    response = test_client.get("/health")
 
     assert response.status_code == 200
 
@@ -23,10 +63,10 @@ def test_health_endpoint():
     assert body["model_loaded"] is True
 
 
-def test_root_endpoint():
+def test_root_endpoint(test_client):
     """Root endpoint should expose service metadata."""
 
-    response = client.get("/")
+    response = test_client.get("/")
 
     assert response.status_code == 200
 
@@ -39,37 +79,21 @@ def test_root_endpoint():
     assert body["version"] == "1.0.0"
 
 
-def test_prediction_endpoint():
+def test_prediction_endpoint(test_client):
     """Prediction endpoint should return a valid probability."""
 
-    data = pd.read_csv(
-        "data/processed/customer_feature_matrix.csv",
-        low_memory=False,
-        nrows=1,
-    )
-
-    row = data.iloc[0].drop(
-        labels=[
-            "Bad_label",
-            "customer_no",
-        ],
-        errors="ignore",
-    )
-
-    row = row.where(
-        pd.notna(row),
-        None,
-    )
-
     payload = {
-        "features": row.to_dict()
+        "features": {
+            "feature_1": 1.0,
+            "feature_2": 2.0,
+            "feature_3": 0.5,
+        }
     }
 
-    with TestClient(app) as test_client:
-        response = test_client.post(
-            "/predict",
-            json=payload,
-        )
+    response = test_client.post(
+        "/predict",
+        json=payload,
+    )
 
     assert response.status_code == 200
 
@@ -89,15 +113,14 @@ def test_prediction_endpoint():
     }
 
 
-def test_empty_prediction_payload():
+def test_empty_prediction_payload(test_client):
     """Empty features should return HTTP 400."""
 
-    with TestClient(app) as test_client:
-        response = test_client.post(
-            "/predict",
-            json={
-                "features": {}
-            },
-        )
+    response = test_client.post(
+        "/predict",
+        json={
+            "features": {}
+        },
+    )
 
     assert response.status_code == 400
