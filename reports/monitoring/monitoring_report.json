@@ -1,0 +1,296 @@
+{
+    "generated_at_utc": "2026-09-06T16:52:18.732205+00:00",
+    "model_version": "1.0.0",
+    "model_health": "ALERT",
+    "features_monitored": 54,
+    "stable_features": 48,
+    "moderate_drift_features": 2,
+    "significant_drift_features": 3,
+    "highest_drift_feature": "feature_49",
+    "highest_psi": 1.625081,
+    "psi_thresholds": {
+        "stable": "PSI < 0.10",
+        "moderate_drift": "0.10 <= PSI < 0.25",
+        "significant_drift": "PSI >= 0.25"
+    },
+    "recommendation": "Significant feature drift detected. Investigate data changes, evaluate model performance and consider retraining before continued production use.",
+    "feature_drift": [
+        {
+            "feature": "feature_49",
+            "psi": 1.625081,
+            "drift_status": "SIGNIFICANT_DRIFT"
+        },
+        {
+            "feature": "feature_26",
+            "psi": 1.606782,
+            "drift_status": "SIGNIFICANT_DRIFT"
+        },
+        {
+            "feature": "feature_4",
+            "psi": 0.532146,
+            "drift_status": "SIGNIFICANT_DRIFT"
+        },
+        {
+            "feature": "feature_35",
+            "psi": 0.110308,
+            "drift_status": "MODERATE_DRIFT"
+        },
+        {
+            "feature": "feature_69",
+            "psi": 0.110308,
+            "drift_status": "MODERATE_DRIFT"
+        },
+        {
+            "feature": "feature_52",
+            "psi": 0.084812,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_40",
+            "psi": 0.062955,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "max_freq_enquiry",
+            "psi": 0.04139,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "payment_history_length_max",
+            "psi": 0.029741,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "payment_history_length_mean",
+            "psi": 0.026177,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "enquiry_count",
+            "psi": 0.024006,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_7",
+            "psi": 0.023833,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "account_count",
+            "psi": 0.021079,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_41",
+            "psi": 0.017744,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_39",
+            "psi": 0.012543,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "enquiry_amount_sum",
+            "psi": 0.012333,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "payment_history_max_dpd_max",
+            "psi": 0.012075,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "enquiry_amount_max",
+            "psi": 0.011646,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "payment_history_mean_dpd_max",
+            "psi": 0.011004,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "has_30_plus_dpd_sum",
+            "psi": 0.009392,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "payment_history_mean_dpd_mean",
+            "psi": 0.008706,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "payment_history_max_dpd_mean",
+            "psi": 0.00706,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "has_90_plus_dpd_sum",
+            "psi": 0.007008,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_65",
+            "psi": 0.006689,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "enquiry_amount_min",
+            "psi": 0.006452,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_64",
+            "psi": 0.006364,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_3",
+            "psi": 0.006191,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "dpd_30_59_share_mean",
+            "psi": 0.005963,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_66",
+            "psi": 0.005561,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_30",
+            "psi": 0.005458,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "dpd_0_29_share_mean",
+            "psi": 0.005204,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "enquiry_amount_mean",
+            "psi": 0.005196,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "dpd_90_plus_share_mean",
+            "psi": 0.004663,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_71",
+            "psi": 0.004361,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_68",
+            "psi": 0.003915,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_34",
+            "psi": 0.003915,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "has_30_plus_dpd_mean",
+            "psi": 0.003534,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_56",
+            "psi": 0.003153,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_29",
+            "psi": 0.002922,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "dpd_60_89_share_mean",
+            "psi": 0.002762,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "has_90_plus_dpd_mean",
+            "psi": 0.002753,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_44",
+            "psi": 0.00224,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "enquiry_purpose_nunique",
+            "psi": 0.001604,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_14",
+            "psi": 0.0,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_19",
+            "psi": 0.0,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_31",
+            "psi": 0.0,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_25",
+            "psi": 0.0,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_55",
+            "psi": 0.0,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_42",
+            "psi": 0.0,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_67",
+            "psi": 0.0,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_6",
+            "psi": 0.0,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_78",
+            "psi": 0.0,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_76",
+            "psi": 0.0,
+            "drift_status": "STABLE"
+        },
+        {
+            "feature": "feature_74",
+            "psi": NaN,
+            "drift_status": "UNAVAILABLE"
+        }
+    ],
+    "validation_context": {
+        "type": "offline_drift_validation",
+        "split_method": "temporal",
+        "reference_share": 0.7,
+        "monitoring_share": 0.3,
+        "note": "This report validates the monitoring pipeline using historical project data. It is not live production drift."
+    }
+}
