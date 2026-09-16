@@ -734,6 +734,9 @@ Bank_GoodCredit_Credit_Risk/
 │   └── workflows/
 │       └── ci.yml
 │
+├── notebooks/
+│   └── Bank_GoodCredit_Credit_Risk_Modeling.ipynb
+│
 ├── reports/
 │   ├── figures/
 │   │   ├── bad_rate_deciles.png
@@ -758,6 +761,12 @@ Bank_GoodCredit_Credit_Risk/
 │   └── app/
 │       ├── entrypoint.sh
 │       └── serve.py
+│
+├── sagemaker_package/
+│   ├── code/
+│   │   ├── inference.py
+│   │   └── requirements.txt
+│   └── credit_risk_model.joblib
 │
 ├── scripts/
 │   └── run_monitoring.py
@@ -793,6 +802,7 @@ Bank_GoodCredit_Credit_Risk/
 │   └── test_report.py
 │
 ├── cloud_prediction.json
+├── test_payload.json
 ├── Dockerfile
 ├── model_card.md
 ├── pyproject.toml

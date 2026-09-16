@@ -39,4 +39,5 @@ logs/
 
 # OS
 .DS_Store
-Thumbs.db
+Thumbs.dbsagemaker_error.txt
+sagemaker_error.txt
